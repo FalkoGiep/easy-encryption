@@ -1,14 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <string>
-#include <iostream>
-#include <stdio.h>
-#include <ctype.h>
 
-using namespace std;
-
+#include "vigenere.h"
 std::string AVAILABLE_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-
 int index(char c) {
 	for(int ii = 0; ii < AVAILABLE_CHARS.size(); ii++) {
 		if(AVAILABLE_CHARS[ii] == c) {

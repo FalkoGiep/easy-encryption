@@ -36,7 +36,7 @@ static std::string  cvt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         // 234567890123
                           "0123456789+/";
 
-//
+//
 //----< convert vector of bytes to std::string >---------------------
 
 std::string Base64::encode(const std::vector<char>& data)
@@ -82,7 +82,7 @@ std::string Base64::encode(const std::vector<char>& data)
 
   return(ret);
 }
-//
+//
 //----< convert std::string to vector of bytes >---------------------
 
 std::vector<char> Base64::decode(const std::string& data)
@@ -122,7 +122,7 @@ std::vector<char> Base64::decode(const std::string& data)
   return(ret);
 }
 
-//
+//
 //----< create encoded string from binary file contents >------------
 
 std::string Base64::encodeFromFile(const std::string& inFileName)
@@ -160,61 +160,3 @@ void Base64::decodeToFile(
   out.close();
 }
 
-//
-#ifdef TEST_BASE64
-
-#include <iostream>
-//#include <fstream>
-
-void main()
-{
-  std::cout << "\n  Demonstrate Base64 Encoding and Decoding "
-            << "\n ==========================================\n";
-
-  ///////////////////////////////////////////////////////////////////
-  // encoding ascii string
-
-  std::string msg
-    = "We're not in Kansas anymore, Toto!";
-
-  std::vector<char> vmsg(msg.begin(),msg.end());
-  std::string encodedMsg = Base64::encode(vmsg);
-  std::vector<char> vdecoded = Base64::decode(encodedMsg);
-  std::string decodedMsg(vdecoded.begin(),vdecoded.end());
-
-  std::cout << "\n  original: " << msg;
-  std::cout << "\n  encoded:  " << encodedMsg;
-  std::cout << "\n  decoded:  " << decodedMsg;
-  std::cout << "\n";
-
-  ////////////////////////////////////////////////////////////////////
-  // encoding binary file
-
-  const std::string ifile = "debug\\Base64Encoding.exe";
-  const std::string ofile1 = "debug\\temp.dat";
-  const std::string ofile2 = "debug\\temp.exe";
-
-  try
-  {
-    std::cout << "\n  creating encoded string from binary file " 
-              << ifile << std::endl;
-    std::string encodedString = Base64::encodeFromFile(ifile);
-  
-    std::string temp(encodedString.begin(), encodedString.begin() + 50);
-    std::cout << "\n  First fifty bytes of encoded string:\n  " 
-              << temp << "\n";
-
-    std::cout << "\n  writing decoded string to binary file " 
-              << ofile2 << "\n";
-    Base64::decodeToFile(ofile2,encodedString);
-
-    std::cout << "\n  Use fc to demonstrate that "
-              << ifile << "\n  is identical to " << ofile2 << "\n\n";
-  }
-  catch(std::exception& e)
-  {
-    std::cout << "\n  " << e.what() << "\n\n";
-  }
-}
-
-#endif

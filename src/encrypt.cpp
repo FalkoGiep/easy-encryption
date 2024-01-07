@@ -1,10 +1,6 @@
-#include "Base64.h"
-#include "vigenere.h"
-#include <iostream>
-#include <string>
+# include "encrypt.h"
 
-
-std::string encrypt(std::string& msg, std::string& key)
+std::string encryptVigenere(std::string& msg, std::string& key)
 {
     std::vector<char> msg2(msg.begin(), msg.end());
     std::string b64_str = Base64::encode(msg2);
@@ -92,7 +88,7 @@ std::string sanitize_utf8(std::string& str)
 }
 
 
-std::string decrypt(std::string& encrypted_msg, std::string& key)
+std::string decryptVigenere(std::string& encrypted_msg, std::string& key)
 {
     std::string newKey = extend_key(encrypted_msg, key);
     std::string b64_encoded_str = decrypt_vigenere(encrypted_msg, newKey);
